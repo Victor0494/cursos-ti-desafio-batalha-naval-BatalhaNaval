@@ -4,11 +4,64 @@
 // Este código inicial serve como base para o desenvolvimento do sistema de Batalha Naval.
 // Siga os comentários para implementar cada parte do desafio.
 
+#define TAM 10
+#define TAM_NAVIO 3
+
 int main() {
     // Nível Novato - Posicionamento dos Navios
-    // Sugestão: Declare uma matriz bidimensional para representar o tabuleiro (Ex: int tabuleiro[5][5];).
-    // Sugestão: Posicione dois navios no tabuleiro, um verticalmente e outro horizontalmente.
-    // Sugestão: Utilize `printf` para exibir as coordenadas de cada parte dos navios.
+    int tabuleiro[TAM][TAM] = {0};
+
+    // Vetores que representam os navios
+    int navio_horizontal[TAM_NAVIO] = {3, 3, 3};
+    int navio_vertical[TAM_NAVIO]   = {3, 3, 3};
+
+    // Coordenadas iniciais
+    int linha_h = 3, coluna_h = 3; // horizontal
+    int linha_v = 5, coluna_v = 8; // vertical
+
+    //  Validação do navio horizontal 
+    if (coluna_h + TAM_NAVIO > TAM) {
+        printf("Erro: navio horizontal fora do tabuleiro\n");
+        return 1;
+    }
+
+    for (int i = 0; i < TAM_NAVIO; i++) {
+        if (tabuleiro[linha_h][coluna_h + i] != 0) {
+            printf("Erro: sobreposicao no navio horizontal\n");
+            return 1;
+        }
+    }
+
+    // Inserção do navio horizontal
+    for (int i = 0; i < TAM_NAVIO; i++) {
+        tabuleiro[linha_h][coluna_h + i] = navio_horizontal[i];
+    }
+
+    //  Validação do navio vertical 
+    if (linha_v + TAM_NAVIO > TAM) {
+        printf("Erro: navio vertical fora do tabuleiro\n");
+        return 1;
+    }
+
+    for (int i = 0; i < TAM_NAVIO; i++) {
+        if (tabuleiro[linha_v + i][coluna_v] != 0) {
+            printf("Erro: sobreposicao no navio vertical\n");
+            return 1;
+        }
+    }
+
+    // Inserção do navio vertical
+    for (int i = 0; i < TAM_NAVIO; i++) {
+        tabuleiro[linha_v + i][coluna_v] = navio_vertical[i];
+    }
+
+    // Exibição do tabuleiro 
+    for (int i = 0; i < TAM; i++) {
+        for (int j = 0; j < TAM; j++) {
+            printf("%3d ", tabuleiro[i][j]);
+        }
+        printf("\n");
+    }
 
     // Nível Aventureiro - Expansão do Tabuleiro e Posicionamento Diagonal
     // Sugestão: Expanda o tabuleiro para uma matriz 10x10.
